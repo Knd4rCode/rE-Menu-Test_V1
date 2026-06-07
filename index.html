@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>Streamproof Menu</title>
     <style>
-        /* This keeps the webpage background clear so you can see the game behind it */
+        /* Hidden by default until the Lua script tells it to open */
         body {
             margin: 0;
             padding: 0;
-            background-color: rgba(0, 0, 0, 0) !important; /* Forces the browser layer to stay see-through */
+            background-color: transparent !important;
             overflow: hidden;
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+            display: none; 
         }
 
-        /* The actual menu box container */
         .menu-wrapper {
             position: absolute;
             top: 15%;
@@ -47,25 +47,31 @@
             text-align: center;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s ease;
         }
 
-        /* Hover animation effect */
         .menu-btn:hover {
             background: #ff3333;
             color: black;
-            border-color: #ff3333;
         }
     </style>
 </head>
 <body>
 
     <div class="menu-wrapper">
-        <div class="menu-title">redENGINE DUI</div>
+        <div class="menu-title">redENGINE NUI</div>
         <div class="menu-btn">Heal Player</div>
         <div class="menu-btn">Give Armor</div>
-        <div class="menu-btn">Clean Clothes</div>
     </div>
 
+    <script>
+        // This listens to your redENGINE Lua script toggles!
+        window.addEventListener('message', function(event) {
+            if (event.data.type === "open_menu") {
+                document.body.style.display = "block";
+            } else if (event.data.type === "close_menu") {
+                document.body.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
